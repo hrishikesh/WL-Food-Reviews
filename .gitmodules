@@ -1,0 +1,9 @@
+[submodule "app/Plugin/OAuth"]
+	path = app/Plugin/OAuth
+	url = git://github.com/seddonmedia/cakephp-oauth-server.git
+[submodule "vendors/oauth2-php"]
+	path = vendors/oauth2-php
+	url = git://github.com/quizlet/oauth2-php.git
+[submodule "app/Plugin/BootstrapCake"]
+	path = app/Plugin/BootstrapCake
+	url = git://github.com/visionred/BootstrapCake.git
