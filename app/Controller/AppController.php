@@ -59,7 +59,6 @@ class AppController extends Controller {
             )
         ),
         'Session',
-        'OAuth.OAuth'
     );
 
     public function beforeFilter() {

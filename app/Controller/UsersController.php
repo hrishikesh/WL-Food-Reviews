@@ -1,5 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
+App::import('Vendor', 'GoogleAuth/Google_Client');
+App::import('Vendor', 'GoogleAuth/contrib/Google_Oauth2Service');
 /**
  * Users Controller
  *
@@ -49,8 +51,23 @@ class UsersController extends AppController {
         $this->layout = 'login';
     }
 
+
+    public function glogin()
+    {
+        $client = new Google_Client();
+        $client->setApplicationName("My Test App");
+        $client->setClientId('insert_your_oauth2_client_id');
+        $client->setClientSecret('insert_your_oauth2_client_secret');
+        $client->setRedirectUri('insert_your_redirect_uri');
+        $client->setDeveloperKey('insert_your_developer_key');         
+        $oauth2 = new Google_Oauth2Service($client);
+
+    }
+
     public function logout() {
         $this->redirect($this->Auth->logout());
+
+
     }
 
 /**

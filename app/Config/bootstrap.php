@@ -182,4 +182,4 @@ CakeLog::config('error', array(
 CakePlugin::load('BootstrapCake');
 //CakePlugin::load('AclExtras');
 //CakePlugin::load('Acl', array('bootstrap' => true));
-CakePlugin::load('OAuth',array('routes' => true));
+//CakePlugin::load('OAuth',array('routes' => true));
