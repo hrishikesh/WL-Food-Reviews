@@ -30,9 +30,11 @@ class UsersController extends AppController {
     /**
      * Before Filter
      */
+
+
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('login');
+        $this->Auth->allow('*');
     }
 
 /**
@@ -52,22 +54,68 @@ class UsersController extends AppController {
     }
 
 
-    public function glogin()
+/**
+ * Google OAuth Authentication
+ */
+    public function authenticate()
     {
-        $client = new Google_Client();
-        $client->setApplicationName("My Test App");
-        $client->setClientId('insert_your_oauth2_client_id');
-        $client->setClientSecret('insert_your_oauth2_client_secret');
-        $client->setRedirectUri('insert_your_redirect_uri');
-        $client->setDeveloperKey('insert_your_developer_key');         
-        $oauth2 = new Google_Oauth2Service($client);
+        //only try to authenticate if no token exists in the session
+        if (!$this->Session->check('OAuth2Token')) {
+            //create our api client
+            $apiClient = new Google_Client();
+            $apiClient->setApprovalPrompt('auto');
+            $apiClient->setScopes(array(
+                'https://www.googleapis.com/auth/userinfo.profile',
+                'https://www.googleapis.com/auth/userinfo.email',
+            ));
 
+            $apiClient->createAuthUrl();
+            $this->set('login_url', $apiClient->createAuthUrl());
+        } else {
+            $this->redirect(array('action'=>'index'));
+        }
+
+        //a
     }
 
+/**
+ * Callback for Google Auth
+ */
+    public function callback() {
+        $apiClient = new Google_Client();
+        if (isset($this->request->query['code'])) {
+            $apiClient->authenticate($this->request->query['code']);
+            if ($apiClient->getAccessToken()) {
+                $this->Session->write('OAuth2Token', $apiClient->getAccessToken());
+            }
+            $this->redirect(array('action'=>'callback'));
+        }
+
+        $userProfileInfo = $this->_getGoogleProfileInfo();
+        print_r($userProfileInfo);die;
+    }
+
+
+    private function _getGoogleProfileInfo()
+    {
+        $apiClient = new Google_Client();
+        if($this->Session->read('OAuth2Token')) {
+            $apiClient->setAccessToken($this->Session->read('OAuth2Token'));
+            $oauth2 = new Google_Oauth2Service($apiClient);
+            return $oauth2->userinfo->get();
+        } else {
+            $this->redirect(array('action'=>'authenticate'));
+        }
+        return false;
+    }
+
+
     public function logout() {
+        $client = new Google_Client();
+        if ($client->getAccessToken()) {
+            $client->revokeToken();
+        }
         $this->redirect($this->Auth->logout());
-
-
     }
 
 /**

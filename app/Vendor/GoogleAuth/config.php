@@ -25,12 +25,12 @@ $apiConfig = array(
     'application_name' => '',
 
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
-    'oauth2_client_id' => '',
-    'oauth2_client_secret' => '',
-    'oauth2_redirect_uri' => '',
+    'oauth2_client_id' => '71147977290-566d9bon1kdf2lmvaasnaho21v9ut12f.apps.googleusercontent.com',
+    'oauth2_client_secret' => 'b4tX0Tk3vUxYqqBJavJgTysV',
+    'oauth2_redirect_uri' => 'http://foodreview.weboniselab.com/users/callback',
 
     // The developer key, you get this at https://code.google.com/apis/console
-    'developer_key' => '',
+    'developer_key' => 'AIzaSyC1jmlcODKjP0Lej4TrAJbWijGLcnNKF_A',
   
     // Site name to show in the Google's OAuth 1 authentication screen.
     'site_name' => 'www.example.org',
