@@ -1,19 +1,20 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * User Model
+ * Feedback Model
  *
- * @property Role $Role
- * @property Feedback $Feedback
+ * @property User $User
+ * @property Meal $Meal
+ * @property FeedbackResponse $FeedbackResponse
  */
-class User extends AppModel {
+class Feedback extends AppModel {
 
 /**
  * Display field
  *
  * @var string
  */
-	public $displayField = 'name';
+	public $displayField = 'comment';
 
 /**
  * Validation rules
@@ -21,9 +22,19 @@ class User extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'name' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+		'user_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'meal_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -41,9 +52,16 @@ class User extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Role' => array(
-			'className' => 'Role',
-			'foreignKey' => 'role_id',
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Meal' => array(
+			'className' => 'Meal',
+			'foreignKey' => 'meal_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -56,9 +74,9 @@ class User extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Feedback' => array(
-			'className' => 'Feedback',
-			'foreignKey' => 'user_id',
+		'FeedbackResponse' => array(
+			'className' => 'FeedbackResponse',
+			'foreignKey' => 'feedback_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

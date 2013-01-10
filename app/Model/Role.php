@@ -1,12 +1,11 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * User Model
+ * Role Model
  *
- * @property Role $Role
- * @property Feedback $Feedback
+ * @property User $User
  */
-class User extends AppModel {
+class Role extends AppModel {
 
 /**
  * Display field
@@ -36,29 +35,14 @@ class User extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'Role' => array(
-			'className' => 'Role',
-			'foreignKey' => 'role_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
-
-/**
  * hasMany associations
  *
  * @var array
  */
 	public $hasMany = array(
-		'Feedback' => array(
-			'className' => 'Feedback',
-			'foreignKey' => 'user_id',
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'role_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

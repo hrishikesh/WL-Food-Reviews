@@ -1,12 +1,12 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * User Model
+ * Meal Model
  *
- * @property Role $Role
  * @property Feedback $Feedback
+ * @property MealItem $MealItem
  */
-class User extends AppModel {
+class Meal extends AppModel {
 
 /**
  * Display field
@@ -36,21 +36,6 @@ class User extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'Role' => array(
-			'className' => 'Role',
-			'foreignKey' => 'role_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
-
-/**
  * hasMany associations
  *
  * @var array
@@ -58,7 +43,20 @@ class User extends AppModel {
 	public $hasMany = array(
 		'Feedback' => array(
 			'className' => 'Feedback',
-			'foreignKey' => 'user_id',
+			'foreignKey' => 'meal_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'MealItem' => array(
+			'className' => 'MealItem',
+			'foreignKey' => 'meal_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

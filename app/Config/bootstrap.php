@@ -180,3 +180,4 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 CakePlugin::load('BootstrapCake');
+CakePlugin::load('Migrations');

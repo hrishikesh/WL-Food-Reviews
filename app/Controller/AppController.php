@@ -53,11 +53,7 @@ class AppController extends Controller {
     public $helpers = array('BootstrapCake.Bootstrap','Html', 'Form', 'Session');
 
     public $components = array(
-        'Auth' => array(
-            'authorize' => array(
-                'Actions' => array('actionPath' => 'Controllers')
-            )
-        ),
+        'Auth'=> array('authorize' => array('Controller')),
         'Session',
     );
 
@@ -76,6 +72,16 @@ class AppController extends Controller {
         if (isset($this->params['prefix']) && in_array($this->params['prefix'], $adminRoute)) {
             return true;
         }
+        return false;
+    }
+
+    public function isAuthorized($user) {
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+
+        // Default deny
         return false;
     }
 }

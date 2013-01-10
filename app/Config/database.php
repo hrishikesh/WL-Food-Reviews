@@ -65,7 +65,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => 'root',
-		'database' => 'food_reviews',
+		'database' => 'food_feedback',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);

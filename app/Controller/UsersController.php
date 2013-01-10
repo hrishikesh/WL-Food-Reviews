@@ -115,7 +115,12 @@ class UsersController extends AppController {
         $userData = $this->User->findByGoogleid($googleId);
 
         if(0 >= count($userData) && !isset($userData['User']) && empty($userData['User'])) {
-            if(!$this->User->save(array('googleid'=> $googleId, 'username'=> $userProfileInfo['email'], 'password' => null, 'role'=>'user')))
+            if(!$this->User->save(array(
+                'googleid'=> trim($googleId),
+                'username'=> $userProfileInfo['email'],
+                'password' => null, 'role'=>'user',
+                'profile_image_url'=>$userProfileInfo['url'])
+            ))
             {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }

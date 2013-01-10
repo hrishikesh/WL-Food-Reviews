@@ -1,19 +1,18 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * User Model
+ * Response Model
  *
- * @property Role $Role
  * @property Feedback $Feedback
  */
-class User extends AppModel {
+class Response extends AppModel {
 
 /**
  * Display field
  *
  * @var string
  */
-	public $displayField = 'name';
+	public $displayField = 'text';
 
 /**
  * Validation rules
@@ -21,7 +20,17 @@ class User extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'name' => array(
+		'text' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'image' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -36,38 +45,25 @@ class User extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
- * belongsTo associations
+ * hasAndBelongsToMany associations
  *
  * @var array
  */
-	public $belongsTo = array(
-		'Role' => array(
-			'className' => 'Role',
-			'foreignKey' => 'role_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
-
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
+	public $hasAndBelongsToMany = array(
 		'Feedback' => array(
 			'className' => 'Feedback',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
+			'joinTable' => 'feedback_responses',
+			'foreignKey' => 'response_id',
+			'associationForeignKey' => 'feedback_id',
+			'unique' => 'keepExisting',
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
-			'exclusive' => '',
 			'finderQuery' => '',
-			'counterQuery' => ''
+			'deleteQuery' => '',
+			'insertQuery' => ''
 		)
 	);
 

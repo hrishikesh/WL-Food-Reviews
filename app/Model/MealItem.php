@@ -1,12 +1,12 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * User Model
+ * MealItem Model
  *
- * @property Role $Role
- * @property Feedback $Feedback
+ * @property Meal $Meal
+ * @property FeedbackResponse $FeedbackResponse
  */
-class User extends AppModel {
+class MealItem extends AppModel {
 
 /**
  * Display field
@@ -31,6 +31,16 @@ class User extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'meal_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -41,9 +51,9 @@ class User extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Role' => array(
-			'className' => 'Role',
-			'foreignKey' => 'role_id',
+		'Meal' => array(
+			'className' => 'Meal',
+			'foreignKey' => 'meal_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -56,9 +66,9 @@ class User extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Feedback' => array(
-			'className' => 'Feedback',
-			'foreignKey' => 'user_id',
+		'FeedbackResponse' => array(
+			'className' => 'FeedbackResponse',
+			'foreignKey' => 'meal_item_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
