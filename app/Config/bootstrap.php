@@ -180,6 +180,3 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 CakePlugin::load('BootstrapCake');
-//CakePlugin::load('AclExtras');
-//CakePlugin::load('Acl', array('bootstrap' => true));
-//CakePlugin::load('OAuth',array('routes' => true));

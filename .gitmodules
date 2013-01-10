@@ -1,12 +1,3 @@
-[submodule "vendors/oauth2-php"]
-	path = vendors/oauth2-php
-	url = git://github.com/quizlet/oauth2-php.git
 [submodule "app/Plugin/BootstrapCake"]
 	path = app/Plugin/BootstrapCake
 	url = git://github.com/visionred/BootstrapCake.git
-[submodule "vendors/OAuth"]
-	path = vendors/OAuth
-	url = git://github.com/cakebaker/oauth-consumer.git
-[submodule "app/Vendor/OAuth"]
-	path = app/Vendor/OAuth
-	url = git://github.com/cakebaker/oauth-consumer.git
