@@ -37,7 +37,7 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </a>
-	          <?php echo $this->Html->link('Roles Management', '/', array('class' => 'brand')); ?>
+	          <?php echo $this->Html->link('Webonise Lab', '/', array('class' => 'brand')); ?>
 	          <div class="container nav-collapse">
 	            <ul class="nav">
                     <li><?php echo $this->Html->link(__('List Groups'), array('controller'=> 'groups','action' => 'index')); ?></li>

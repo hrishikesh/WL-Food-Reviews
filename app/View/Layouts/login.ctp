@@ -69,7 +69,7 @@
 	    <div class="navbar navbar-fixed-top">
 	      <div class="navbar-inner">
 	        <div class="container">
-	          <?php echo $this->Html->link(__('Role Management'), '/', array('class' => 'brand')); ?>
+	          <?php echo $this->Html->link(__('Webonise Lab'), '/', array('class' => 'brand')); ?>
 	        </div>
 	      </div>
 	    </div>

@@ -43,13 +43,6 @@ class UsersController extends AppController {
  * @return void
  */
     public function login() {
-        /*if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirect());
-            } else {
-                $this->Session->setFlash(__('Invalid username or password, try again'));
-            }
-        }*/
         if (!$this->Session->check('OAuth2Token'))
         {
             //create our api client
@@ -63,39 +56,11 @@ class UsersController extends AppController {
 
             $this->set('login_url', $apiClient->createAuthUrl());
 
-        } /*else {
-            $this->redirect(array('action'=>'login'));
-        }*/
+        }
 
         $this->layout = 'login';
     }
 
-
-/**
- * Google OAuth Authentication
- */
-   /* public function authenticate()
-    {
-        //only try to authenticate if no token exists in the session
-        if (!$this->Session->check('OAuth2Token'))
-        {
-            //create our api client
-            $apiClient = new Google_Client();
-            $apiClient->setApprovalPrompt('auto');
-            $apiClient->setScopes(array(
-                'https://www.googleapis.com/auth/userinfo.profile',
-                'https://www.googleapis.com/auth/userinfo.email',
-            ));
-
-            $apiClient->createAuthUrl();
-            $this->set('login_url', $apiClient->createAuthUrl());
-
-        } else {
-            $this->redirect(array('action'=>'login'));
-        }
-
-        //a
-    }*/
 
 /**
  * Callback for Google Auth
@@ -111,6 +76,14 @@ class UsersController extends AppController {
         }
 
         $userProfileInfo = $this->_getGoogleProfileInfo();
+
+
+        if ( strpos($userProfileInfo['email'], "@weboniselab.com") === false ) {
+            $this->Session->delete('OAuth2Token');
+            $this->Session->setFlash(__('Please login from your Webonise Lab Account'));
+            $this->redirect(array('action'=>'login'));
+        }
+
         $googleId = $userProfileInfo['id'];
         $userData = $this->User->findByGoogleid($googleId);
 
@@ -119,17 +92,17 @@ class UsersController extends AppController {
                 'googleid'=> trim($googleId),
                 'username'=> $userProfileInfo['email'],
                 'password' => null, 'role'=>'user',
-                'profile_image_url'=>$userProfileInfo['url'])
+                'name'=>  $userProfileInfo['name'],
+                'profile_image_url'=> $userProfileInfo['picture'])
             ))
             {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }
         }
-
-        $this->Auth->login($this->User->findByGoogleid($googleId));
-
-        //$this->redirect(array('action'=>'index'));
-        //print_r($userProfileInfo);die;
+        $user = $this->User->findByGoogleid($googleId);
+        if($this->Auth->login($user['User'])) {
+            $this->redirect($this->Auth->redirect());
+        };
     }
 
 
@@ -140,17 +113,15 @@ class UsersController extends AppController {
             $apiClient->setAccessToken($this->Session->read('OAuth2Token'));
             $oauth2 = new Google_Oauth2Service($apiClient);
             return $oauth2->userinfo->get();
-        } else {
-            $this->redirect(array('action'=>'authenticate'));
         }
         return false;
     }
 
 
     public function logout() {
-//        if($this->Session->check('OAuth2Token')) {
-//            $this->Session->delete('OAuth2Token');
-//        }
+        if($this->Session->check('OAuth2Token')) {
+            $this->Session->delete('OAuth2Token');
+        }
         $this->redirect($this->Auth->logout());
     }
 

@@ -48,7 +48,7 @@ class AppController extends Controller {
     /**
      * @var string
      */
-    public $layout = 'roles_layout';
+    public $layout = 'main';
 
     public $helpers = array('BootstrapCake.Bootstrap','Html', 'Form', 'Session');
 
@@ -62,9 +62,9 @@ class AppController extends Controller {
             $this->layout = "admin";
         }
         //Configure AuthComponent
-        /*$this->Auth->loginAction = array('controller' => 'oauth', 'action' => 'login');
+        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-        $this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'add');*/
+        $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'index');
     }
 
     protected function _isAdminMode() {

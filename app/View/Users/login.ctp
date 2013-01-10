@@ -17,6 +17,8 @@
         */?>
 
         <!--<a href="<?php /*echo $login_url;*/?>"><div class='btn btn-large btn-primary'>Google</div></a>-->
-        <?php echo $this->Html->link(__('Google Login'), $login_url, array('class'=>'btn btn-large btn-primary','div'=>true));?>
+        <?php if(isset($login_url) && !empty($login_url)) :?>
+            <?php echo $this->Html->link(__('Google Login'), $login_url, array('class'=>'btn btn-large btn-primary','div'=>true));?>
+        <?php endif; ?>
 
     </div>
