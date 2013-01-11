@@ -3,22 +3,34 @@
  * @var $this view
  */
 ?>
-    <div class='form-signin'>
-        <?php echo $this->Session->flash('auth'); ?>
-        <?php /*echo $this->Form->create('User'); */?><!--
+    <div class='container-narrow sign-in'>
 
-            <h2 class="form-signin-heading"><?php /*echo __('Please sign in'); */?></h2>
-            <?php /*echo $this->Form->input('username', array('class'=>'input-block-level', 'placeholder'=>'Username'));
-            echo $this->Form->input('password', array('class'=>'input-block-level', 'placeholder'=>'Password'));
-            */?>
+        <div class="row-fluid">
+            <div class="span12">
 
-        --><?php /*echo $this->Form->submit(__('Login'), array('class'=>'btn btn-large btn-primary'));
-            echo $this->Form->end();
-        */?>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>Sign in with...</h3>
+            </div>
+        </div>
 
-        <!--<a href="<?php /*echo $login_url;*/?>"><div class='btn btn-large btn-primary'>Google</div></a>-->
-        <?php if(isset($login_url) && !empty($login_url)) :?>
-            <?php echo $this->Html->link(__('Google Login'), $login_url, array('class'=>'btn btn-large btn-primary','div'=>true));?>
-        <?php endif; ?>
+        <div class="row-fluid">
+            <div class="span12">
+                <!--<div style="margin: 0 auto;width:120px;">-->
+                <p>
+                    <?php if(isset($login_url) && !empty($login_url)) :?>
+                    <?php echo $this->Html->link($this->Html->image('google-Icon.png',array('width'=>170,"height"=>60)), $login_url, array('escape'=>false,'class'=>'btn btn-large btn-custom','div'=>true));?>
+                    <?php endif; ?>
+                </p>
+                <!--</div>-->
+            </div>
+        </div>
 
+        <div class="row-fluid">
+            <div class="span12">
+                <?php echo $this->Session->flash('auth'); ?>
+            </div>
+        </div>
     </div>

@@ -26,53 +26,59 @@
 			echo $this->fetch('script');
     	?>
 
+        <style>
+            body {
+                padding-top: 10px;
+                padding-bottom: 40px;
+                background-color: #f5f5f5;
+            }
+            .container-narrow {
+                max-width: 700px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #fff;
+                border: 1px solid #e5e5e5;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 10px;
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            }
+            #meal-tab .active a {
+                background-color: #EEEEEE;
+                text-decoration: none;
+                border-bottom: 1px solid;
+                border-color: #DDDDDD #DDDDDD transparent;
+            }
+        </style>
+
 	</head>
 	<body>
 
-	    <div class="navbar navbar-fixed-top">
-	      <div class="navbar-inner">
-	        <div class="container">
-	          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </a>
-	          <?php echo $this->Html->link('Webonise Lab', '/', array('class' => 'brand')); ?>
-	          <div class="container nav-collapse">
-	            <ul class="nav">
-                    <li><?php echo $this->Html->link(__('List Groups'), array('controller'=> 'groups','action' => 'index')); ?></li>
-                    <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?></li>
-                    <li><?php echo $this->Html->link(__('List Posts'), array('controller' => 'posts', 'action' => 'index')); ?></li>
-	            </ul>
-                  <ul class="nav pull-right">
-                      <li class="dropdown">
-                          <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
-                          <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
-                              <li><a tabindex="-1" href="#"><?php echo $this->Html->link('Logout', '/users/logout'); ?></a></li>
-                          </ul>
+	    <div class="container-narrow">
+            <div class="row-fluid">
+                <div class="span6">
+                    LOGO
+                </div>
+                <div class="span6">
+                    <ul class="nav nav-pills pull-right">
+                        <li class="disabled"><a href="#">Hi Hrishikesh</a></li>
+                        <li><a href="">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12"></div>
+            </div>
 
-                      </li>
-                  </ul>
-	          </div><!--/.nav-collapse -->
-	        </div>
-	      </div>
-	    </div>
-
-	    <div class="container-fluid" style="margin-top: 70px;">
+            <ul id="meal-tab" class="row-fluid nav nav-tabs">
+                <li class="active span6"><a data-toggle="tab" href="#breakfast">Breakfast</a></li>
+                <li class="span6"><a data-toggle="tab" href="#lunch">Lunch</a></li>
+            </ul>
 	        <div class="row-fluid">
-	            <div class="span3">
-	              <div class="well sidebar-nav">
-	                <h3>Sidebar</h3>
-	                <ul class="nav nav-list">
-	                  <li class="nav-header">Sidebar</li>
-                        <li><?php echo $this->Html->link(__('List Groups'), array('controller'=> 'groups','action' => 'index')); ?></li>
-                        <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?></li>
-                        <li><?php echo $this->Html->link(__('List Posts'), array('controller' => 'posts', 'action' => 'index')); ?></li>
-	                </ul>
-	              </div><!--/.well -->
-	            </div><!--/span-->
 
-	           	<div id="main-content" class="span9">
+	           	<div id="main-content" class="span12">
 
 					<?php echo $this->Session->flash(); ?>
 

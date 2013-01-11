@@ -32,12 +32,14 @@
                 background-color: #f5f5f5;
             }
             .inner-wrapper {
-                max-width: 350px;
+                min-width: 500px;
+                max-width: 500px;
                 margin: 0 auto 20px;
                 margin-top: 110px;
             }
-            .form-signin {
-                max-width: 300px;
+            .container-narrow {
+                min-width: 500px;
+                max-width: 500px;
                 padding: 19px 29px 29px;
                 margin: 0 auto 20px;
                 margin-top: 10px;
@@ -50,16 +52,28 @@
                 -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
                 box-shadow: 0 1px 2px rgba(0,0,0,.05);
             }
-            .form-signin .form-signin-heading,
-            .form-signin .checkbox {
-                margin-bottom: 10px;
+
+
+            .btn-custom {
+                background-color: hsl(260, 4%, 49%) !important;
+                background-repeat: repeat-x; filter:
+                progid:DXImageTransform.Microsoft.gradient(startColorstr="#e2e1e4", endColorstr="#7b7781");
+                background-image: -khtml-gradient(linear, left top, left bottom, from(#e2e1e4), to(#7b7781));
+                background-image: -moz-linear-gradient(top, #e2e1e4, #7b7781);
+                background-image: -ms-linear-gradient(top, #e2e1e4, #7b7781);
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e2e1e4), color-stop(100%, #7b7781));
+                background-image: -webkit-linear-gradient(top, #e2e1e4, #7b7781);
+                background-image: -o-linear-gradient(top, #e2e1e4, #7b7781);
+                background-image: linear-gradient(#e2e1e4, #7b7781);
+                border-color: #7b7781 #7b7781 hsl(260, 4%, 39%); color: #333 !important;
+                text-shadow: 0 1px 1px rgba(255, 255, 255, 0.66);
+                -webkit-font-smoothing: antialiased;
+                min-width: 170px;
+                min-height: 60px;
             }
-            .form-signin input[type="text"],
-            .form-signin input[type="password"] {
-                font-size: 16px;
-                height: auto;
-                margin-bottom: 15px;
-                padding: 7px 9px;
+
+            .sign-in .span12 {
+                text-align: center;
             }
 
         </style>

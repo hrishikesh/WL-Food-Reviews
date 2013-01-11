@@ -14,11 +14,12 @@ class ResponseTest extends CakeTestCase {
  */
 	public $fixtures = array(
 		'app.response',
+		'app.feedback_response',
 		'app.feedback',
 		'app.user',
+		'app.role',
 		'app.meal',
-		'app.meal_item',
-		'app.feedback_response'
+		'app.meal_item'
 	);
 
 /**

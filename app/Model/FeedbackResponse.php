@@ -5,6 +5,7 @@ App::uses('AppModel', 'Model');
  *
  * @property Feedback $Feedback
  * @property MealItem $MealItem
+ * @property Response $Response
  */
 class FeedbackResponse extends AppModel {
 
@@ -64,6 +65,13 @@ class FeedbackResponse extends AppModel {
 		'MealItem' => array(
 			'className' => 'MealItem',
 			'foreignKey' => 'meal_item_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Response' => array(
+			'className' => 'Response',
+			'foreignKey' => 'response_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

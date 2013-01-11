@@ -15,7 +15,11 @@ class FeedbackResponseTest extends CakeTestCase {
 	public $fixtures = array(
 		'app.feedback_response',
 		'app.feedback',
-		'app.meal_item'
+		'app.user',
+		'app.role',
+		'app.meal',
+		'app.meal_item',
+		'app.response'
 	);
 
 /**
