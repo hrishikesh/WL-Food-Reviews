@@ -59,27 +59,39 @@ class FeedbackResponsesController extends AppController {
             }
 
             $this->FeedbackResponse->Feedback->set("user_id", 1);
-            $this->FeedbackResponse->Feedback->set("meal_id", 1);
+            $this->FeedbackResponse->Feedback->set("meal_id", $this->request->data('FeedbackResponse.meal_id'));
             unset($this->request->data['FeedbackResponse']['meal_id']);
             $this->FeedbackResponse->Feedback->save();
 
             $this->request->data['FeedbackResponse']['feedback_id'] = $this->FeedbackResponse->Feedback->getLastInsertID();
+            if(!isset($this->request->data['FeedbackResponse']['response_data'])) {
+                $saveData = $this->request->data;
+            } else {
+                $saveData = array();
+                $responseData = $this->request->data('FeedbackResponse.response_data');
+                $requestData = $this->request->data;
+                unset($requestData['FeedbackResponse']['response_data']);
+                foreach($responseData as $data) {
+                    if((isset($data['meal_item_id']) && !empty($data['meal_item_id'])) && (isset($data['response_id']) && !empty($data['response_id']))) {
+                        $arrResponse['FeedbackResponse'] = array_merge($requestData['FeedbackResponse'], $data);
+                        $saveData[] = $arrResponse;
+                    }
+                }
+            }
 
 			$this->FeedbackResponse->create();
-			if ($this->FeedbackResponse->save($this->request->data)) {
+			if ($this->FeedbackResponse->save($saveData)) {
 				$this->Session->setFlash(__('The feedback response has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('Your feedback response could not be saved. Please, try again.'));
 			}
 		}
-		//$feedbacks = $this->FeedbackResponse->Feedback->find('list');
-		//$mealItems = $this->FeedbackResponse->MealItem->find('list');
+
         $mealItems = $this->FeedbackResponse->MealItem->find('list', array('conditions'=>array('meal_id'=>2)));
 
         $this->FeedbackResponse->Response->recursive = -1;
 		$responses = $this->FeedbackResponse->Response->find('all', array('fields'=>array('Response.id', 'Response.text', 'Response.image')));
-        //$responseImages = $this->FeedbackResponse->Response->find('list', array('fields'=>array('Response.id', 'Response.image')));
 
 		$this->set(compact('mealItems', 'responses','responseImages'));
 	}

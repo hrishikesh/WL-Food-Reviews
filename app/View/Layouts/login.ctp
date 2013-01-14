@@ -11,7 +11,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<title><?php echo $title_for_layout; ?></title>
-
+        <link href='http://fonts.googleapis.com/css?family=Allura|Shadows+Into+Light|Bad+Script' rel='stylesheet' type='text/css'>
 		<!--[if lt IE 9]>
       		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
     	<![endif]-->
@@ -30,13 +30,9 @@
                 padding-top: 40px;
                 padding-bottom: 40px;
                 background-color: #f5f5f5;
+                font-family: 'Bad Script', cursive;
             }
-            .inner-wrapper {
-                min-width: 500px;
-                max-width: 500px;
-                margin: 0 auto 20px;
-                margin-top: 110px;
-            }
+
             .container-narrow {
                 min-width: 500px;
                 max-width: 500px;
@@ -80,22 +76,35 @@
 	</head>
 	<body>
 
-	    <div class="navbar navbar-fixed-top">
-	      <div class="navbar-inner">
-	        <div class="container">
-	          <?php echo $this->Html->link(__('Webonise Lab'), '/', array('class' => 'brand')); ?>
-	        </div>
-	      </div>
-	    </div>
-
 	    <div class="container-fluid">
-            <div class="inner-wrapper">
-                <?php echo $this->Session->flash(); ?>
-                <?php echo $this->fetch('content'); ?>
-                <footer>
-                    <p>&copy; Weboise Lab <?php echo date('Y'); ?></p>
-                </footer>
+            <div class='container-narrow sign-in'>
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <?php echo $this->Html->image('logo.png');?>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h3>Sign in with...</h3>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <?php echo $this->Session->flash(); ?>
+                        <?php echo $this->fetch('content'); ?>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <?php echo $this->Session->flash('auth'); ?>
+                    </div>
+                </div>
             </div>
+                <footer>
+                   <!-- <p>&copy; Weboise Lab <?php /*echo date('Y'); */?></p>-->
+                </footer>
+
 
 	    </div> <!-- /container -->
 

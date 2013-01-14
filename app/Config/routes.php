@@ -31,6 +31,11 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
+Router::connect(
+    '/feedback',
+    array('controller' => 'feedback_responses', 'action' => 'add')
+);
+
 /**
  * Load all plugin routes.  See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

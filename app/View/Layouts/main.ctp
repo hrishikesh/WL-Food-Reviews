@@ -10,6 +10,7 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title><?php echo $title_for_layout; ?></title>
+        <link href='http://fonts.googleapis.com/css?family=Allura|Shadows+Into+Light|Bad+Script' rel='stylesheet' type='text/css'>
 
 		<!--[if lt IE 9]>
       		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
@@ -31,6 +32,7 @@
                 padding-top: 10px;
                 padding-bottom: 40px;
                 background-color: #f5f5f5;
+                font-family: 'Shadows Into Light', cursive;
             }
             .container-narrow {
                 max-width: 700px;
@@ -59,7 +61,7 @@
 	    <div class="container-narrow">
             <div class="row-fluid">
                 <div class="span6">
-                    LOGO
+                    <?php echo $this->Html->image('logo.png');?>
                 </div>
                 <div class="span6">
                     <ul class="nav nav-pills pull-right">

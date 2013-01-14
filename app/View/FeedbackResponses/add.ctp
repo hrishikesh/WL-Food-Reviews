@@ -17,8 +17,16 @@ $(document).ready(function(){
    });
 
    $('#lunch table tr td').live('click', function(){
-        $(this).parent().find('td').removeClass('selected-response')
-        $(this).addClass('selected-response');
+        if($(this).hasClass('selected-response')) {
+            $(this).removeClass('selected-response');
+            $(this).parent().find('td input.meal_item').val('');
+            $(this).parent().find('td input.response').val('');
+        } else {
+            $(this).parent().find('td').removeClass('selected-response');
+            $(this).addClass('selected-response');
+            $(this).parent().find('td input.meal_item').val($(this).parent().attr('meal_item'));
+            $(this).parent().find('td input.response').val($(this).attr('response'));
+        }
 /*        var response_data = $('#lunch #response_data').val();
         var response = $(this).parent().attr('meal_item') + '-' + $(this).attr('response');
         if(response_data!='') {
@@ -54,20 +62,26 @@ $(document).ready(function(){
     </div>
 
     <div id="lunch" class="tab-pane">
-        <table class="table table-hover">
-            <?php foreach($mealItems as $mealItemId => $mealItem): ?>
+
+        <?php echo $this->Form->create('FeedbackResponse'); ?>
+        <table class="table">
+            <?php $counter=0; foreach($mealItems as $mealItemId => $mealItem): ?>
             <tr meal_item="<?php echo $mealItemId;?>">
                 <td><?php echo $mealItem; ?></td>
                 <?php foreach($responses as $response): ?>
-                    <td response="<?php echo $response['Response']['id'] ?>"><div style="width: 48px; margin: 0 auto;"><?php echo $this->Html->image("smiley/{$response['Response']['image']}")?></div></td>
+                    <td response="<?php echo $response['Response']['id'] ?>">
+                        <div style="width: 48px; margin: 0 auto;cursor: pointer;"><?php echo $this->Html->image("smiley/{$response['Response']['image']}")?></div>
+                    </td>
                 <?php endforeach; ?>
+                <td>
+                    <?php echo $this->Form->hidden('meal_item_id_'.$counter , array('value'=>'','name'=>'data[FeedbackResponse][response_data]['.$counter.'][meal_item_id]', 'class'=>'meal_item'));?>
+                    <?php echo $this->Form->hidden('response_id_'.$counter , array('value'=>'','name'=>'data[FeedbackResponse][response_data]['.$counter.'][response_id]', 'class'=>'response'));?>
+                </td>
             </tr>
-            <?php endforeach; ?>
+            <?php $counter++; endforeach; ?>
         </table>
 
         <?php
-            echo $this->Form->hidden('response_data', array('value'=>'','name'=>'data[FeedbackResponse][response_data]'));
-            echo $this->Form->hidden('meal_item_id', array('value'=>'', 'name'=>'data[FeedbackResponse][meal_item_id]'));
             echo $this->Form->textarea('comment');
             echo $this->Form->hidden('meal_id', array('value'=>2));
             echo $this->Form->end(__('Submit'));
