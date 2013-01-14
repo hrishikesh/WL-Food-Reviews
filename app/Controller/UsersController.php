@@ -88,19 +88,20 @@ class UsersController extends AppController {
         $userData = $this->User->findByGoogleid($googleId);
 
         if(0 >= count($userData) && !isset($userData['User']) && empty($userData['User'])) {
-            if(!$this->User->save(array(
+            if(!$this->User->save(array('User'=>array(
                 'googleid'=> trim($googleId),
                 'username'=> $userProfileInfo['email'],
-                'password' => null, 'role'=>'user',
+                'password' => $userProfileInfo['email'],
+                'role_id'=>2,
                 'name'=>  $userProfileInfo['name'],
                 'profile_image_url'=> $userProfileInfo['picture'])
-            ))
+            )))
             {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }
         }
         $user = $this->User->findByGoogleid($googleId);
-        if($this->Auth->login($user['User'])) {
+        if($this->Auth->login($user)) {
             $this->redirect($this->Auth->redirect());
         };
     }

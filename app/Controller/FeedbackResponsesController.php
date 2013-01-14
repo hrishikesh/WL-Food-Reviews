@@ -80,7 +80,7 @@ class FeedbackResponsesController extends AppController {
             }
 
 			$this->FeedbackResponse->create();
-			if ($this->FeedbackResponse->save($saveData)) {
+			if ($this->FeedbackResponse->saveMany($saveData)) {
 				$this->Session->setFlash(__('The feedback response has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {

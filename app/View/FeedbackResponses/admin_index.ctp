@@ -1,6 +1,6 @@
 <div class="feedbackResponses index">
 	<h2><?php echo __('Feedback Responses'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
+	<table cellpadding="0" cellspacing="0" class="table">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('feedback_id'); ?></th>
@@ -44,15 +44,15 @@
 	?>
 	</div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
+<!--<div class="actions">
+	<h3><?php /*echo __('Actions'); */?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Feedback Response'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Feedbacks'), array('controller' => 'feedbacks', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Feedback'), array('controller' => 'feedbacks', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Meal Items'), array('controller' => 'meal_items', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Meal Item'), array('controller' => 'meal_items', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Responses'), array('controller' => 'responses', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Response'), array('controller' => 'responses', 'action' => 'add')); ?> </li>
+		<li><?php /*echo $this->Html->link(__('New Feedback Response'), array('action' => 'add')); */?></li>
+		<li><?php /*echo $this->Html->link(__('List Feedbacks'), array('controller' => 'feedbacks', 'action' => 'index')); */?> </li>
+		<li><?php /*echo $this->Html->link(__('New Feedback'), array('controller' => 'feedbacks', 'action' => 'add')); */?> </li>
+		<li><?php /*echo $this->Html->link(__('List Meal Items'), array('controller' => 'meal_items', 'action' => 'index')); */?> </li>
+		<li><?php /*echo $this->Html->link(__('New Meal Item'), array('controller' => 'meal_items', 'action' => 'add')); */?> </li>
+		<li><?php /*echo $this->Html->link(__('List Responses'), array('controller' => 'responses', 'action' => 'index')); */?> </li>
+		<li><?php /*echo $this->Html->link(__('New Response'), array('controller' => 'responses', 'action' => 'add')); */?> </li>
 	</ul>
-</div>
+</div>-->

@@ -58,13 +58,13 @@ class AppController extends Controller {
     );
 
     public function beforeFilter() {
-        if($this->_isAdminMode()) {
+        /*if($this->_isAdminMode()) {
             $this->layout = "admin";
-        }
+        }*/
         //Configure AuthComponent
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-        $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'index');
+        $this->Auth->loginRedirect = array('controller' => 'feedback_responses', 'action' => 'add');
     }
 
     protected function _isAdminMode() {
