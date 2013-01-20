@@ -53,7 +53,11 @@ class AppController extends Controller {
     public $helpers = array('BootstrapCake.Bootstrap','Html', 'Form', 'Session');
 
     public $components = array(
-        'Auth'=> array('authorize' => array('Controller')),
+        'Auth' => array(
+            'loginRedirect' => array('controller' => 'feedback_responses', 'action' => 'add'),
+            'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
+            'authorize' => array('controller')
+        ),
         'Session',
     );
 
@@ -62,9 +66,9 @@ class AppController extends Controller {
             $this->layout = "admin";
         }*/
         //Configure AuthComponent
-        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+        /*$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-        $this->Auth->loginRedirect = array('controller' => 'feedback_responses', 'action' => 'add');
+        $this->Auth->loginRedirect = array('controller' => 'feedback_responses', 'action' => 'add');*/
     }
 
     protected function _isAdminMode() {
@@ -76,6 +80,10 @@ class AppController extends Controller {
     }
 
     public function isAuthorized($user) {
+        // Any registered user can access public functions
+        if (empty($this->request->params['admin'])) {
+            return true;
+        }
         // Admin can access every action
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;

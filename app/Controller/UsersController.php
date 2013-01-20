@@ -78,11 +78,11 @@ class UsersController extends AppController {
         $userProfileInfo = $this->_getGoogleProfileInfo();
 
 
-        if ( strpos($userProfileInfo['email'], "@weboniselab.com") === false ) {
+        /*if ( strpos($userProfileInfo['email'], "@weboniselab.com") === false ) {
             $this->Session->delete('OAuth2Token');
             $this->Session->setFlash(__('Please login from your Webonise Lab Account'));
             $this->redirect(array('action'=>'login'));
-        }
+        }*/
 
         $googleId = $userProfileInfo['id'];
         $userData = $this->User->findByGoogleid($googleId);
@@ -94,16 +94,19 @@ class UsersController extends AppController {
                 'password' => $userProfileInfo['email'],
                 'role_id'=>2,
                 'name'=>  $userProfileInfo['name'],
-                'profile_image_url'=> $userProfileInfo['picture'])
+                /*'profile_image_url'=> $userProfileInfo['picture']*/)
             )))
             {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }
         }
+        $this->User->recursive = -1;
         $user = $this->User->findByGoogleid($googleId);
+
         if($this->Auth->login($user)) {
             $this->redirect($this->Auth->redirect());
         };
+
     }
 
 
