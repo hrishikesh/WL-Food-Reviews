@@ -78,11 +78,11 @@ class UsersController extends AppController {
         $userProfileInfo = $this->_getGoogleProfileInfo();
 
 
-        /*if ( strpos($userProfileInfo['email'], "@weboniselab.com") === false ) {
+        if ( strpos($userProfileInfo['email'], "@weboniselab.com") === false ) {
             $this->Session->delete('OAuth2Token');
             $this->Session->setFlash(__('Please login from your Webonise Lab Account'));
             $this->redirect(array('action'=>'login'));
-        }*/
+        }
 
         $googleId = $userProfileInfo['id'];
         $userData = $this->User->findByGoogleid($googleId);
