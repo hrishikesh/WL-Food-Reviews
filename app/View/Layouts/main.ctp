@@ -65,8 +65,8 @@
                 </div>
                 <div class="span6">
                     <ul class="nav nav-pills pull-right">
-                        <li class="disabled"><a href="#">Hi Hrishikesh</a></li>
-                        <li><a href="">Logout</a></li>
+                        <li class="disabled"><a href="#">Hi <?php echo $this->Session->read('Auth.User.name');?></a></li>
+                        <li><?php echo $this->Html->link(_('Logout'), array('controller'=>'users', 'action'=>'logout'))?></li>
                     </ul>
                 </div>
             </div>

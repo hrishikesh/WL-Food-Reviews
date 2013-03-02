@@ -56,6 +56,8 @@ class UsersController extends AppController {
 
             $this->set('login_url', $apiClient->createAuthUrl());
 
+        }else {
+            $this->redirect($this->referer());
         }
 
         $this->layout = 'login';
@@ -78,32 +80,39 @@ class UsersController extends AppController {
         $userProfileInfo = $this->_getGoogleProfileInfo();
 
 
-        if ( strpos($userProfileInfo['email'], "@weboniselab.com") === false ) {
+        /*if ( strpos($userProfileInfo['email'], "@weboniselab.com") === false ) {
             $this->Session->delete('OAuth2Token');
             $this->Session->setFlash(__('Please login from your Webonise Lab Account'));
             $this->redirect(array('action'=>'login'));
-        }
+        }*/
 
         $googleId = $userProfileInfo['id'];
         $userData = $this->User->findByGoogleid($googleId);
 
         if(0 >= count($userData) && !isset($userData['User']) && empty($userData['User'])) {
-            if(!$this->User->save(array('User'=>array(
-                'googleid'=> trim($googleId),
-                'username'=> $userProfileInfo['email'],
-                'password' => $userProfileInfo['email'],
-                'role_id'=>2,
-                'name'=>  $userProfileInfo['name'],
-                /*'profile_image_url'=> $userProfileInfo['picture']*/)
-            )))
+            if(
+                !$this->User->save(
+                    array(
+                        'User'=>array(
+                            'googleid'=> trim($googleId),
+                            'username'=> $userProfileInfo['email'],
+                            'password' => $userProfileInfo['email'],
+                            'role_id'=>2,
+                            'name'=>  $userProfileInfo['name'],
+                            'profile_image_url'=> isset($userProfileInfo['picture'])?$userProfileInfo['picture']:'',
+                            'profile_link'=> $userProfileInfo['link']
+                        )
+                    )
+                )
+            )
             {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(_('The user could not be saved. Please, try again.'));
             }
         }
         $this->User->recursive = -1;
         $user = $this->User->findByGoogleid($googleId);
 
-        if($this->Auth->login($user)) {
+        if($this->Auth->login($user['User'])) {
             $this->redirect($this->Auth->redirect());
         };
 
